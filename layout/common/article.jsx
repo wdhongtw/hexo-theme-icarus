@@ -24,6 +24,7 @@ module.exports = class extends Component {
         const { url_for, date, date_xml, __, _p } = helper;
 
         const indexLaunguage = config.language || 'en';
+        const skip_same_date = config.article.updated_auto_hide || false;
         const language = page.lang || page.language || config.language || 'en';
         const cover = page.cover ? url_for(page.cover) : null;
 
@@ -47,7 +48,7 @@ module.exports = class extends Component {
                                 __html: _p('article.created_at', `<time dateTime="${date_xml(page.date)}" title="${new Date(page.date).toLocaleString()}">${date(page.date)}</time>`)
                             }}></span>}
                             {/* Last Update Date */}
-                            {page.updated && <span class="level-item" dangerouslySetInnerHTML={{
+                            {page.updated && !(skip_same_date && moment(page.date).isSame(moment(page.updated))) && <span class="level-item" dangerouslySetInnerHTML={{
                                 __html: _p('article.updated_at', `<time dateTime="${date_xml(page.updated)}" title="${new Date(page.updated).toLocaleString()}">${date(page.updated)}</time>`)
                             }}></span>}
                             {/* author */}

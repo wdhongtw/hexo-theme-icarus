@@ -40,6 +40,12 @@
             "default": true,
             "nullable": true
         },
+        "updated_auto_hide": {
+            "type": "boolean",
+            "description": "Whether to hide updated date if updated is the same as date",
+            "default": false,
+            "nullable": true
+        },
         "licenses": {
             "$ref": "/misc/poly_links.json",
             "description": "Article licensing block",
